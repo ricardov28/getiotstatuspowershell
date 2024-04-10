@@ -1,0 +1,28 @@
+<!DOCTYPE html>  
+<html>  
+<head>  
+  <title>Welcome to the website</title>  
+</head>  
+<body>  
+  <h1>Welcome to the website</h1>  
+  <button onclick="fetchAzureFunction()">Fetch Azure Function</button>  
+  <div id="response"></div>  
+  
+  <script>  
+    function fetchAzureFunction() {  
+      fetch("https://getiotcnxstatus.azurewebsites.net/api/HttpTrigger?code=UYpl6wQ8WUHKCeaykO5BzAAx-AY47Yg763wYv7KHWCKGAzFu0KVoHw==")  
+        .then(response => response.json())  
+        .then(data => {  
+          const responseDiv = document.getElementById("response");  
+          responseDiv.innerHTML = `  
+            <p>Last Activity Time: ${data.LastActivityTime}</p>  
+            <p>Connection State: ${data.ConnectionState}</p>  
+          `;  
+        })  
+        .catch(error => {  
+          console.error("Error fetching Azure Function:", error);  
+        });  
+    }  
+  </script>  
+</body>  
+</html>  
